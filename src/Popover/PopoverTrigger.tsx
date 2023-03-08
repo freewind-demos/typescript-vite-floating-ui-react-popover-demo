@@ -1,14 +1,17 @@
-import {
-    useMergeRefs
-} from "@floating-ui/react";
-import * as React from "react";
-import { useTooltipContext } from "./useTooltipContext";
+import { useMergeRefs } from "@floating-ui/react";
+import React from "react";
+import { usePopoverContext } from "./usePopoverContext";
 
-export const TooltipTrigger = React.forwardRef<
+interface Props {
+    children: React.ReactNode;
+    asChild?: boolean;
+}
+
+export const PopoverTrigger = React.forwardRef<
     HTMLElement,
-    React.HTMLProps<HTMLElement> & { asChild?: boolean }
->(function TooltipTrigger({ children, asChild = false, ...props }, propRef) {
-    const context = useTooltipContext();
+    React.HTMLProps<HTMLElement> & Props
+>(function PopoverTrigger({ children, asChild = false, ...props }, propRef) {
+    const context = usePopoverContext();
     const childrenRef = (children as any).ref;
     const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
@@ -28,6 +31,7 @@ export const TooltipTrigger = React.forwardRef<
     return (
         <button
             ref={ref}
+            type="button"
             // The user can style the trigger based on the state
             data-state={context.open ? "open" : "closed"}
             {...context.getReferenceProps(props)}
@@ -36,4 +40,3 @@ export const TooltipTrigger = React.forwardRef<
         </button>
     );
 });
-

@@ -1,4 +1,4 @@
-TypeScript Vite "@floating-ui/react" Tooltip Demo
+TypeScript Vite "@floating-ui/react" Popover Demo
 ===========================
 
 ```
